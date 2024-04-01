@@ -27,43 +27,64 @@ import {
   Youtube,
   YoutubeInput,
 } from "../../../styles/boards-new";
+import { useMutation, gql } from "@apollo/client";
+
+const CREATE_BOARD = gql`
+  mutation createBoard($writer: String!, $password: String!, $title: String!, $contents: String!){
+    createBoard(createBoardInput: { writer: $writer, password: $password, title: $title, contents: $contents }) {
+      _id
+    }
+  }
+`;
+
+// const CREATE_BOARD = gql`
+//   mutation createBoard($createBoardInput: CreateBoardInput!){
+//     createBoard(CreateBoardInput: $createBoardInput) {
+//       _id
+//     }
+//   }
+// `;
+
+
 export default function NewPage() {
   const [writer, setWriter] = useState("");
   const [password, setPassword] = useState("");
   const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
+  const [contents, setContents] = useState("");
 
   const [writerError, setWriterError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [titleError, setTitleError] = useState("");
-  const [contentError, setContentError] = useState("");
+  const [contentsError, setContentsError] = useState("");
 
-  function onChangeWriter(event) {
+  const [createBoard] = useMutation(CREATE_BOARD);
+
+  const onChangeWriter = (event) => {
     setWriter(event.target.value);
     if (event.target.value !== "") {
       setWriterError("");
     }
-  }
-  function onChangePassword(event) {
+  };
+  const onChangePassword = (event) => {
     setPassword(event.target.value);
     if (event.target.value !== "") {
       setPasswordError("");
     }
-  }
-  function onChangeTitle(event) {
+  };
+  const onChangeTitle = (event) => {
     setTitle(event.target.value);
     if (event.target.value !== "") {
       setTitleError("");
     }
-  }
-  function onChangeContent(event) {
-    setContent(event.target.value);
+  };
+  const onChangeContents = (event) => {
+    setContents(event.target.value);
     if (event.target.value !== "") {
-      setContentError("");
+      setContentsError("");
     }
-  }
+  };
 
-  function onClickSubmit() {
+  const onClickSubmit = async () => {
     if (writer === "") {
       setWriterError("작성자을 입력해주세요");
     }
@@ -73,13 +94,20 @@ export default function NewPage() {
     if (title === "") {
       setTitleError("제목을 입력해주세요");
     }
-    if (content === "") {
-      setContentError("본문을 입력해주세요");
+    if (contents === "") {
+      setContentsError("본문을 입력해주세요");
     }
-    if (writer && password && title && content) {
-      alert("게시글이 등록되었습니다.");
+    if (writer && password && title && contents) {
+      const result = await createBoard({
+        variables: {
+          writer: writer,
+          password: password,
+          title: title,
+          contents: contents,
+        },
+      });
     }
-  }
+  };
 
   return (
     <Container>
@@ -104,8 +132,8 @@ export default function NewPage() {
         </Title>
         <Content>
           <Name>내용</Name>
-          <ContentInput type="text" placeholder="내용을 작성해주세요" onChange={onChangeContent}></ContentInput>
-          <div style={{ fontSize: "10px", color: "red", marginTop: "-10px" }}>{contentError}</div>
+          <ContentInput type="text" placeholder="내용을 작성해주세요" onChange={onChangeContents}></ContentInput>
+          <div style={{ fontSize: "10px", color: "red", marginTop: "-10px" }}>{contentsError}</div>
         </Content>
         <Address>
           <Name>주소</Name>
