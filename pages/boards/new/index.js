@@ -28,9 +28,10 @@ import {
   YoutubeInput,
 } from "../../../styles/boards-new";
 import { useMutation, gql } from "@apollo/client";
+import { useRouter } from "next/router";
 
 const CREATE_BOARD = gql`
-  mutation createBoard($writer: String!, $password: String!, $title: String!, $contents: String!){
+  mutation createBoard($writer: String!, $password: String!, $title: String!, $contents: String!) {
     createBoard(createBoardInput: { writer: $writer, password: $password, title: $title, contents: $contents }) {
       _id
     }
@@ -45,7 +46,6 @@ const CREATE_BOARD = gql`
 //   }
 // `;
 
-
 export default function NewPage() {
   const [writer, setWriter] = useState("");
   const [password, setPassword] = useState("");
@@ -58,6 +58,7 @@ export default function NewPage() {
   const [contentsError, setContentsError] = useState("");
 
   const [createBoard] = useMutation(CREATE_BOARD);
+  const router = useRouter();
 
   const onChangeWriter = (event) => {
     setWriter(event.target.value);
@@ -98,14 +99,20 @@ export default function NewPage() {
       setContentsError("본문을 입력해주세요");
     }
     if (writer && password && title && contents) {
-      const result = await createBoard({
-        variables: {
-          writer: writer,
-          password: password,
-          title: title,
-          contents: contents,
-        },
-      });
+      try {
+        const result = await createBoard({
+          variables: {
+            writer: writer,
+            password: password,
+            title: title,
+            contents: contents,
+          },
+        });
+        console.log(result.data.createBoard._id);
+        router.push(`/boards/${result.data.createBoard._id}`);
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
