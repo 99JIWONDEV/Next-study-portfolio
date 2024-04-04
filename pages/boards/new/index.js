@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   Address,
   AddressInput,
@@ -29,22 +28,23 @@ import {
 } from "../../../styles/boards-new";
 import { useMutation, gql } from "@apollo/client";
 import { useRouter } from "next/router";
-
-const CREATE_BOARD = gql`
-  mutation createBoard($writer: String!, $password: String!, $title: String!, $contents: String!) {
-    createBoard(createBoardInput: { writer: $writer, password: $password, title: $title, contents: $contents }) {
-      _id
-    }
-  }
-`;
+import { useState } from "react";
 
 // const CREATE_BOARD = gql`
-//   mutation createBoard($createBoardInput: CreateBoardInput!){
-//     createBoard(CreateBoardInput: $createBoardInput) {
+//   mutation createBoard($writer: String!, $password: String!, $title: String!, $contents: String!) {
+//     createBoard(createBoardInput: { writer: $writer, password: $password, title: $title, contents: $contents }) {
 //       _id
 //     }
 //   }
 // `;
+
+const CREATE_BOARD = gql`
+  mutation createBoard($createBoardInput: CreateBoardInput!) {
+    createBoard(createBoardInput: $createBoardInput) {
+      _id
+    }
+  }
+`;
 
 export default function NewPage() {
   const [writer, setWriter] = useState("");
@@ -102,10 +102,12 @@ export default function NewPage() {
       try {
         const result = await createBoard({
           variables: {
-            writer: writer,
-            password: password,
-            title: title,
-            contents: contents,
+            createBoardInput: {
+              writer,
+              password,
+              title,
+              contents,
+            },
           },
         });
         console.log(result.data.createBoard._id);
