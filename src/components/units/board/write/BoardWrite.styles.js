@@ -195,14 +195,14 @@ justify-content: center;
 export const SubmitBtn = styled.button`
 width: 179px;
 height: 52px;
-background-color: #FFD600;
+background-color: ${(props) => (props.allClick ? "#FFD600" : "")};
 border: none;
 font-size: 16px;
 font-weight: 500;
 color: black;
-cursor: pointer;
+cursor: ${(props) => (props.allClick ? "pointer" : "")};
 &:hover {
-    background-color: #FFD000;
+    background-color: ${(props) => (props.allClick ? "#FFD000" : "")};
   }
 
 `

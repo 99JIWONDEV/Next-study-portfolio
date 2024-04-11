@@ -9,6 +9,7 @@ export default function BoardWrite(){
   const [password, setPassword] = useState("");
   const [title, setTitle] = useState("");
   const [contents, setContents] = useState("");
+  const [allClick, setAllClick] = useState(false);
 
   const [writerError, setWriterError] = useState("");
   const [passwordError, setPasswordError] = useState("");
@@ -20,26 +21,50 @@ export default function BoardWrite(){
 
   const onChangeWriter = (event) => {
     setWriter(event.target.value);
+    if (event.target.value && password && title && contents) {
+      setAllClick(true);
+    }else{
+      setAllClick(false);
+    }
     if (event.target.value !== "") {
       setWriterError("");
+      
     }
   };
   const onChangePassword = (event) => {
     setPassword(event.target.value);
+    if (event.target.value && writer && title && contents) {
+      setAllClick(true);
+    }else{
+      setAllClick(false);
+    }
     if (event.target.value !== "") {
       setPasswordError("");
+      
     }
   };
   const onChangeTitle = (event) => {
     setTitle(event.target.value);
+    if (event.target.value && password && writer && contents) {
+      setAllClick(true);
+    }else{
+      setAllClick(false);
+    }
     if (event.target.value !== "") {
       setTitleError("");
+      
     }
   };
   const onChangeContents = (event) => {
     setContents(event.target.value);
+    if (event.target.value && password && title && writer) {
+      setAllClick(true);
+    }else{
+      setAllClick(false);
+    }
     if (event.target.value !== "") {
       setContentsError("");
+      
     }
   };
 
@@ -82,11 +107,13 @@ export default function BoardWrite(){
     passwordError={passwordError}
     titleError={titleError}
     contentsError={contentsError}
+    allClick={allClick}
     onChangeWriter={onChangeWriter}
     onChangePassword={onChangePassword}
     onChangeTitle={onChangeTitle}
     onChangeContents={onChangeContents}
     onClickSubmit={onClickSubmit}
+    
 />
   )
 }

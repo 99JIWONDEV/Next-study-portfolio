@@ -71,7 +71,7 @@ export default function BoardWriteUI(props){
           </S.CheckBox>
         </S.Setting>
         <S.SubmitBox>
-          <S.SubmitBtn onClick={props.onClickSubmit}>등록하기</S.SubmitBtn>
+          <S.SubmitBtn onClick={props.onClickSubmit} allClick={props.allClick}>등록하기</S.SubmitBtn>
         </S.SubmitBox>
       </S.Box>
     </S.Container>
