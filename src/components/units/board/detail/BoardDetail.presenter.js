@@ -38,6 +38,9 @@ export default function BoardDetailUI(props) {
             </S.LikeIcon>
           </S.LikesIcon>
         </S.Contents>
+      <S.Footer>
+          <S.ListBtn onClick={props.onClickMoveToList}>목록</S.ListBtn>
+      </S.Footer>
       </S.Box>
     </S.Container>
   );
