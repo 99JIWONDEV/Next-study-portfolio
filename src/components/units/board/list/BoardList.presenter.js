@@ -4,6 +4,7 @@ import * as S from "./BoardList.styles";
 export default function BoardListUI(props) {
   return (
     <S.Container>
+      <S.Title>게시판</S.Title>
       <S.Box>
         <S.Row>
           <S.ColumnHeaderBasic>번호</S.ColumnHeaderBasic>
@@ -12,12 +13,15 @@ export default function BoardListUI(props) {
           <S.ColumnHeaderBasic>날짜</S.ColumnHeaderBasic>
         </S.Row>
         {props.data?.fetchBoards.map((el) => (
-        <S.Row key={el._id}> 
-          <S.ColumnBasic>{String(el._id).slice(-4).toUpperCase()}</S.ColumnBasic>
-          <S.ColumnTitle id={el._id} onClick={props.onClickMoveToDetail}>{el.title}</S.ColumnTitle>
-          <S.ColumnBasic>{el.writer}</S.ColumnBasic>
-          <S.ColumnBasic>{getDate(el.createdAt)}</S.ColumnBasic>
-        </S.Row>
+          <S.Row key={el._id}>
+            <S.ColumnBasic>{String(el._id).slice(-4).toUpperCase()}</S.ColumnBasic>
+            <S.ColumnTitle id={el._id} onClick={props.onClickMoveToDetail}>
+              {el.title}
+            </S.ColumnTitle>
+            <S.ColumnBasic>{el.writer}</S.ColumnBasic>
+            <S.ColumnBasic>{getDate(el.createdAt)}</S.ColumnBasic>
+            {console.log(el._id)}
+          </S.Row>
         ))}
       </S.Box>
       <S.Footer>

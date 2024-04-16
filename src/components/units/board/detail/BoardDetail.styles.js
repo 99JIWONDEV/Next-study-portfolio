@@ -98,13 +98,26 @@ display: flex;
 flex-direction: row;
 justify-content: end;
 margin-top: 50px;
+gap: 20px;
 `
 
 export const ListBtn = styled.button`
 display: flex;
-flex-direction: row;
-justify-content: end;
 background-color: #FFD600;
+border: none;
+color: black;
+width: 109px;
+height: 42px;
+font-size: 16px;
+font-weight: 500;
+display: flex;
+align-items: center;
+justify-content: center;
+cursor: pointer;
+`
+
+export const DeleteBtn = styled.button` 
+display: flex;
 border: none;
 color: black;
 width: 109px;

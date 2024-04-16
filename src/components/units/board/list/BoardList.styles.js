@@ -8,6 +8,12 @@ export const Container = styled.div`
   align-items: center;
 `;
 
+export const Title = styled.div`
+  font-size: 36px;
+  font-weight: 700;
+  margin-top: 40px;
+`;
+
 export const Box = styled.div`
   display: flex;
   flex-direction: column;
@@ -18,8 +24,6 @@ export const Box = styled.div`
   border-top: 2px solid black;
   border-bottom: 1px solid black;
 `;
-
-
 
 export const ColumnHeaderBasic = styled.div`
   width: 10%;
@@ -33,8 +37,7 @@ export const ColumnHeaderTitle = styled.div`
   text-align: center;
   font-size: 18px;
   font-weight: 500;
-
-`
+`;
 export const Row = styled.div`
   display: flex;
   flex-direction: row;
@@ -51,7 +54,7 @@ export const ColumnBasic = styled.div`
   text-align: center;
   font-size: 16px;
   font-weight: 400;
-`
+`;
 
 export const ColumnTitle = styled.div`
   width: 70%;
@@ -59,20 +62,20 @@ export const ColumnTitle = styled.div`
   font-size: 16px;
   font-weight: 400;
   cursor: pointer;
-`
+`;
 
 export const Footer = styled.div`
   width: 1200px;
   margin: 20px 30px;
   display: flex;
   justify-content: end;
-`
+`;
 export const Button = styled.button`
-padding: 5px 10px;
-border-radius: 5px;
-background-color: white;
-cursor: pointer;
-&:hover {
-  background-color: lightgray;
-}
-`
+  padding: 5px 10px;
+  border-radius: 5px;
+  background-color: white;
+  cursor: pointer;
+  &:hover {
+    background-color: lightgray;
+  }
+`;

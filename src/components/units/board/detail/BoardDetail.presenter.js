@@ -39,6 +39,7 @@ export default function BoardDetailUI(props) {
           </S.LikesIcon>
         </S.Contents>
       <S.Footer>
+          <S.DeleteBtn id={props.data?.fetchBoard._id} onClick={props.onClickDelete}>삭제</S.DeleteBtn>
           <S.ListBtn onClick={props.onClickMoveToList}>목록</S.ListBtn>
       </S.Footer>
       </S.Box>
