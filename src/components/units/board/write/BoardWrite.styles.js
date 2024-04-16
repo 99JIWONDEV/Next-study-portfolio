@@ -190,6 +190,7 @@ width: 100%;
 margin-top: 80px;
 display: flex;
 justify-content: center;
+gap: 24px;
 `
 
 export const SubmitBtn = styled.button`
@@ -205,4 +206,14 @@ cursor: ${(props) => (props.allClick ? "pointer" : "")};
     background-color: ${(props) => (props.allClick ? "#FFD000" : "")};
   }
 
+`
+export const ListBtn = styled.button`
+width: 179px;
+height: 52px;
+background-color: #FFD600;
+border: none;
+font-size: 16px;
+font-weight: 500;
+color: black;
+cursor: pointer;
 `

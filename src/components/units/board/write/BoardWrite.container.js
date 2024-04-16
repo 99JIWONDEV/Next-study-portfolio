@@ -100,6 +100,9 @@ export default function BoardWrite(){
       }
     }
   };
+  const onClickMoveToList = () => {
+    router.push("/boards");
+  }
 
   return (
     <BoardWriteUI
@@ -113,7 +116,7 @@ export default function BoardWrite(){
     onChangeTitle={onChangeTitle}
     onChangeContents={onChangeContents}
     onClickSubmit={onClickSubmit}
-    
+    onClickMoveToList={onClickMoveToList}
 />
   )
 }
