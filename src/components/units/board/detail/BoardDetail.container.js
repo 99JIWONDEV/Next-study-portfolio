@@ -28,5 +28,9 @@ export default function BoardDetail() {
     router.push("/boards");
   };
 
-  return <BoardDetailUI data={data} onClickMoveToList={onClickMoveToList} onClickDelete={onClickDelete} />;
+  const onClickMoveToBoardEdit = () => {
+    router.push(`/boards/${router.query.boardId}/edit`);
+  };
+
+  return <BoardDetailUI data={data} onClickMoveToList={onClickMoveToList} onClickDelete={onClickDelete} onClickMoveToBoardEdit={onClickMoveToBoardEdit}/>;
 }
