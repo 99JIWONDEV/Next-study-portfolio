@@ -2,14 +2,17 @@ import { useState } from "react";
 import { useMutation } from '@apollo/client'
 import { useRouter } from 'next/router'
 import BoardWriteUI from './BoardWrite.presenter'
-import { CREATE_BOARD } from './BoardWrite.queries'
+import { CREATE_BOARD, UPDATE_BOARD } from './BoardWrite.queries'
 
-export default function BoardWrite(){
+export default function BoardWrite(props){
+  const [allClick, setAllClick] = useState(false);
+  const router = useRouter();
+
   const [writer, setWriter] = useState("");
   const [password, setPassword] = useState("");
   const [title, setTitle] = useState("");
   const [contents, setContents] = useState("");
-  const [allClick, setAllClick] = useState(false);
+ 
 
   const [writerError, setWriterError] = useState("");
   const [passwordError, setPasswordError] = useState("");
@@ -17,7 +20,8 @@ export default function BoardWrite(){
   const [contentsError, setContentsError] = useState("");
 
   const [createBoard] = useMutation(CREATE_BOARD);
-  const router = useRouter();
+  const [updateBoard] = useMutation(UPDATE_BOARD);
+  
 
   const onChangeWriter = (event) => {
     setWriter(event.target.value);
@@ -100,6 +104,25 @@ export default function BoardWrite(){
       }
     }
   };
+  const onClickUpdate = () => {
+    try {
+      const result = updateBoard({
+        variables: {
+          boardId: router.query.boardId,
+          password,
+          updateBoardInput: {
+            title,
+            contents,
+          },
+        },
+      });
+      router.push(`/boards/${router.data.updateBoard._id}`);
+    } catch (error){
+      console.log(error);
+    }
+  }
+
+
   const onClickMoveToList = () => {
     router.push("/boards");
   }
@@ -110,13 +133,16 @@ export default function BoardWrite(){
     passwordError={passwordError}
     titleError={titleError}
     contentsError={contentsError}
-    allClick={allClick}
+    
     onChangeWriter={onChangeWriter}
     onChangePassword={onChangePassword}
     onChangeTitle={onChangeTitle}
     onChangeContents={onChangeContents}
     onClickSubmit={onClickSubmit}
+    onClickUpdate={onClickUpdate}
     onClickMoveToList={onClickMoveToList}
+    allClick={allClick}
+    isEdit={props.isEdit}
 />
   )
 }
