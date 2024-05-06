@@ -104,23 +104,34 @@ export default function BoardWrite(props){
       }
     }
   };
-  const onClickUpdate = () => {
+  const onClickUpdate = async () => {
+    if (!title && !contents) {
+      alert("수정한 내용이 없습니다.");
+      return;
+    }
+
+    if (!password) {
+      alert("비밀번호를 입력해주세요.");
+      return;
+    }
+
+    const updateBoardInput = {};
+    if (title) updateBoardInput.title = title;
+    if (contents) updateBoardInput.contents = contents;
+    
     try {
-      const result = updateBoard({
+      const result = await updateBoard({
         variables: {
           boardId: router.query.boardId,
           password,
-          updateBoardInput: {
-            title,
-            contents,
-          },
+          updateBoardInput
         },
-      });
-      router.push(`/boards/${router.data.updateBoard._id}`);
-    } catch (error){
-      console.log(error);
+      })
+      router.push(`/boards/${result.data.updateBoard._id}`)
+    } catch(error) {
+      alert(error.message)
     }
-  }
+  };
 
 
   const onClickMoveToList = () => {
@@ -143,6 +154,7 @@ export default function BoardWrite(props){
     onClickMoveToList={onClickMoveToList}
     allClick={allClick}
     isEdit={props.isEdit}
+    data={props.data}
 />
   )
 }

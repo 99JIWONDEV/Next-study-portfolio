@@ -8,7 +8,7 @@ export default function BoardWriteUI(props){
         <S.User>
           <S.Writer>
             <S.Name>작성자</S.Name>
-            <S.WriterInput type="text" placeholder="이름을 입력해주세요" onChange={props.onChangeWriter}></S.WriterInput>
+            <S.WriterInput type="text" placeholder="이름을 입력해주세요" onChange={props.onChangeWriter} defaultValue={props.data?.fetchBoard.writer} readOnly={props.data?.fetchBoard.writer}></S.WriterInput>
             <div style={{ fontSize: "10px", color: "red", marginTop: "-10px" }}>{props.writerError}</div>
           </S.Writer>
           <S.Writer>
@@ -19,12 +19,12 @@ export default function BoardWriteUI(props){
         </S.User>
         <S.Title>
           <S.Name>제목</S.Name>
-          <S.TitleInput type="text" placeholder="제목을 작성해주세요" onChange={props.onChangeTitle}></S.TitleInput>
+          <S.TitleInput type="text" placeholder="제목을 작성해주세요" onChange={props.onChangeTitle} defaultValue={props.data?.fetchBoard.title}></S.TitleInput>
           <div style={{ fontSize: "10px", color: "red", marginTop: "-10px" }}>{props.titleError}</div>
         </S.Title>
         <S.Content>
           <S.Name>내용</S.Name>
-          <S.ContentInput type="text" placeholder="내용을 작성해주세요" onChange={props.onChangeContents}></S.ContentInput>
+          <S.ContentInput type="text" placeholder="내용을 작성해주세요" onChange={props.onChangeContents} defaultValue={props.data?.fetchBoard.contents}></S.ContentInput>
           <div style={{ fontSize: "10px", color: "red", marginTop: "-10px" }}>{props.contentsError}</div>
         </S.Content>
         <S.Address>

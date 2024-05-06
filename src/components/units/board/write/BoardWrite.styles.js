@@ -201,7 +201,8 @@ border: none;
 font-size: 16px;
 font-weight: 500;
 color: black;
-cursor: ${(props) => (props.allClick ? "pointer" : "")};
+/* cursor: ${(props) => (props.allClick ? "pointer" : "")}; */
+cursor: pointer;
 &:hover {
     background-color: ${(props) => (props.allClick ? "#FFD000" : "")};
   }
